@@ -21,6 +21,7 @@ var SITE = {
     social: [
       { label: 'GitHub',    url: 'https://github.com/theaxonaut/GSE33000-AD-analysis' },
       { label: 'X',         url: 'https://x.com/ztgc_rashid' },
+      { label: 'BlueSky',   url: 'https://bsky.app/profile/theaxonaut.bsky.social' },
       { label: 'LinkedIn',  url: 'https://linkedin.com/in/rashid-lab' },
       { label: 'Instagram', url: 'https://instagram.com/sliceof.my.life' }
     ]
