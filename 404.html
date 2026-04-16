@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Lost in the Synaptic Void</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230d0c0b'/><text y='.92em' font-size='85' font-family='Georgia,serif' font-weight='700' fill='%23f0ebe3' x='12'>R</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* ── 404-SPECIFIC STYLES ── */
+
+    .void-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: calc(var(--nav-h) + 4rem) var(--px) 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Floating particles background */
+    .void-particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .void-particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(240,235,227,0.08);
+      border-radius: 50%;
+      animation: particleFloat linear infinite;
+    }
+    @keyframes particleFloat {
+      0%   { transform: translateY(0) translateX(0); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(var(--drift)); opacity: 0; }
+    }
+
+    .void-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    /* Glitch 404 number */
+    .void-code {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(8rem, 25vw, 20rem);
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      position: relative;
+      user-select: none;
+    }
+
+    .void-code-main {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Glitch layers */
+    .void-code-glitch {
+      position: absolute;
+      inset: 0;
+      color: var(--fg);
+      opacity: 0;
+    }
+
+    .void-code-glitch:nth-child(1) {
+      animation: glitch1 4s ease-in-out infinite;
+      color: rgba(255,120,120,0.6);
+    }
+    .void-code-glitch:nth-child(2) {
+      animation: glitch2 4s ease-in-out infinite;
+      color: rgba(120,180,255,0.6);
+    }
+
+    @keyframes glitch1 {
+      0%, 85%, 100% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+      86% { opacity: 1; transform: translate(-4px, -2px); clip-path: inset(20% 0 60% 0); }
+      88% { opacity: 1; transform: translate(3px, 1px); clip-path: inset(50% 0 20% 0); }
+      89% { opacity: 0; transform: translate(0, 0); }
+      92% { opacity: 1; transform: translate(-2px, 3px); clip-path: inset(70% 0 5% 0); }
+      93% { opacity: 0; }
+    }
+
+    @keyframes glitch2 {
+      0%, 87%, 100% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+      88% { opacity: 1; transform: translate(4px, 2px); clip-path: inset(40% 0 30% 0); }
+      90% { opacity: 1; transform: translate(-3px, -1px); clip-path: inset(10% 0 70% 0); }
+      91% { opacity: 0; }
+      94% { opacity: 1; transform: translate(2px, -2px); clip-path: inset(60% 0 15% 0); }
+      95% { opacity: 0; }
+    }
+
+    /* Scan line across the number */
+    .void-code-main::after {
+      content: '';
+      position: absolute;
+      left: -10%;
+      width: 120%;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(240,235,227,0.06) 20%,
+        rgba(240,235,227,0.12) 50%,
+        rgba(240,235,227,0.06) 80%,
+        transparent 100%
+      );
+      animation: scanLine 6s linear infinite;
+    }
+
+    @keyframes scanLine {
+      0%   { top: -10%; opacity: 0; }
+      5%   { opacity: 1; }
+      95%  { opacity: 1; }
+      100% { top: 110%; opacity: 0; }
+    }
+
+    /* Subtitle */
+    .void-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      color: var(--fg);
+    }
+    .void-heading span {
+      color: var(--mid);
+    }
+
+    .void-desc {
+      font-size: clamp(0.85rem, 1.4vw, 1rem);
+      color: var(--mid);
+      line-height: 1.7;
+      max-width: 380px;
+    }
+
+    /* Signal line — decorative */
+    .void-signal {
+      width: clamp(120px, 20vw, 200px);
+      height: 1px;
+      position: relative;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+    .void-signal::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--border);
+    }
+    .void-signal::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -30%;
+      width: 30%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--fg), transparent);
+      animation: signalPulse 3s ease-in-out infinite;
+    }
+    @keyframes signalPulse {
+      0%   { left: -30%; }
+      100% { left: 130%; }
+    }
+
+    /* Error code label */
+    .void-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(240,235,227,0.15);
+    }
+
+    /* Buttons */
+    .void-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .void-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.7rem 1.8rem;
+      border: 1px solid var(--border-h);
+      color: var(--fg);
+      background: none;
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+      cursor: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .void-btn:hover {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+    .void-btn-secondary {
+      border-color: var(--border);
+      color: var(--mid);
+    }
+    .void-btn-secondary:hover {
+      background: rgba(240,235,227,0.06);
+      color: var(--fg);
+      border-color: var(--border-h);
+    }
+
+    /* Random neuroscience fact */
+    .void-fact {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      max-width: 420px;
+      text-align: center;
+    }
+    .void-fact-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(240,235,227,0.12);
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+    .void-fact-text {
+      font-size: 0.84rem;
+      color: rgba(240,235,227,0.25);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* Entry animation */
+    .void-fade {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: voidFadeIn 0.8s ease forwards;
+    }
+    .void-fade:nth-child(1) { animation-delay: 0.1s; }
+    .void-fade:nth-child(2) { animation-delay: 0.25s; }
+    .void-fade:nth-child(3) { animation-delay: 0.4s; }
+    .void-fade:nth-child(4) { animation-delay: 0.5s; }
+    .void-fade:nth-child(5) { animation-delay: 0.6s; }
+    .void-fade:nth-child(6) { animation-delay: 0.7s; }
+    .void-fade:nth-child(7) { animation-delay: 0.85s; }
+    .void-fade:nth-child(8) { animation-delay: 1.0s; }
+
+    @keyframes voidFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Footer on 404 */
+    .void-footer {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      margin-top: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Audio -->
+  <audio id="bg-audio" loop preload="auto">
+    <source src="bgm.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Floating particles (generated by JS) -->
+  <div class="void-particles" id="void-particles"></div>
+
+  <!-- Main -->
+  <div class="void-page">
+    <div class="void-content">
+
+      <div class="void-fade void-label">Error · Page Not Found</div>
+
+      <div class="void-fade void-code">
+        <span class="void-code-main">
+          404
+          <span class="void-code-glitch" aria-hidden="true">404</span>
+          <span class="void-code-glitch" aria-hidden="true">404</span>
+        </span>
+      </div>
+
+      <div class="void-fade void-heading">
+        Lost in the<br><span>Synaptic Void</span>
+      </div>
+
+      <div class="void-fade void-signal"></div>
+
+      <p class="void-fade void-desc">
+        The page you're looking for doesn't exist, was moved, or never formed a proper connection.
+      </p>
+
+      <div class="void-fade void-actions">
+        <a href="index.html" class="void-btn">← Back to Home</a>
+        <a href="index.html#contact" class="void-btn void-btn-secondary">Contact →</a>
+      </div>
+
+      <div class="void-fade void-fact" id="void-fact">
+        <span class="void-fact-label">Random Neuroscience Fact</span>
+        <p class="void-fact-text" id="void-fact-text"></p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="void-footer" id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/engine.js"></script>
+
+  <script>
+    (function () {
+
+      /* ── Build shared components ── */
+      Components.buildNav('nav-container');
+      Components.buildFooter('footer-container');
+
+      /* ── Show nav immediately (no preloader) ── */
+      var nav = document.getElementById('nav');
+      if (nav) nav.classList.add('show');
+
+      /* ── Init engines ── */
+      Cursor.init();
+      Cursor.wireHovers();
+      SoundEngine.restore();
+      SoundEngine.wireHoverSounds();
+
+      /* ── Generate floating particles ── */
+      var container = document.getElementById('void-particles');
+      var count = 40;
+      for (var i = 0; i < count; i++) {
+        var p = document.createElement('div');
+        p.className = 'void-particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = Math.random() * 100 + '%';
+        p.style.animationDuration = (8 + Math.random() * 16) + 's';
+        p.style.animationDelay = -(Math.random() * 20) + 's';
+        p.style.setProperty('--drift', (Math.random() * 60 - 30) + 'px');
+        p.style.width = (1 + Math.random() * 2) + 'px';
+        p.style.height = p.style.width;
+        p.style.opacity = (0.03 + Math.random() * 0.08);
+        container.appendChild(p);
+      }
+
+      /* ── Random neuroscience fact ── */
+      var facts = [
+        'The human brain contains approximately 86 billion neurons, each forming up to 10,000 synaptic connections.',
+        'A single neuron can fire up to 200 times per second, transmitting signals at speeds up to 120 m/s.',
+        'The brain generates about 20 watts of power — enough to dimly light a bulb.',
+        'Your brain uses 20% of your body\'s total oxygen and energy, despite being only 2% of your body weight.',
+        'The connectome — the complete map of neural connections — remains one of the greatest unsolved challenges in neuroscience.',
+        'Synaptic pruning eliminates roughly 50% of all synapses between early childhood and adulthood.',
+        'Glial cells outnumber neurons and play crucial roles in neural signaling, once thought to be mere "brain glue."',
+        'Long-term potentiation (LTP), the cellular basis of memory, was first described in 1973 by Bliss and Lømo.',
+        'The blood-brain barrier is so selective that fewer than 2% of small-molecule drugs can cross it.',
+        'Neurogenesis — the birth of new neurons — continues in the adult hippocampus, challenging decades of dogma.',
+        'The brain\'s default mode network, active during rest, consumes nearly as much energy as focused thinking.',
+        'Alzheimer\'s disease was first described by Alois Alzheimer in 1906 after examining the brain of Auguste Deter.'
+      ];
+
+      var factText = document.getElementById('void-fact-text');
+      if (factText) {
+        factText.textContent = facts[Math.floor(Math.random() * facts.length)];
+      }
+
+    })();
+  </script>
+
+</body>
+</html>
