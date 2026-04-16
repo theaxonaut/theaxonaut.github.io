@@ -76,8 +76,7 @@ var SITE = {
   about: {
     bio: [
       'A <strong>first-principles thinker</strong> pursuing a BSc in Biotechnology at Jamia Hamdard University, New Delhi. Experienced in both wet lab and computational biology, with a focused interest in <strong>neurodegenerative diseases</strong> — particularly Alzheimer\'s.',
-      'Research internships at <strong>AIIMS Delhi</strong> and Jamia Hamdard, and independently performed computational gene expression analysis on post-mortem brain microarray data. Currently founding a university science magazine. Aiming for a <strong>Master\'s in Neuroscience</strong>, followed by a PhD.',
-      'Target: <strong>DZNE — German Center for Neurodegenerative Diseases</strong>.'
+      'Research internships at <strong>AIIMS Delhi</strong> and Jamia Hamdard, and independently performed computational gene expression analysis on post-mortem brain microarray data. Currently founding a university science magazine.',
     ],
 
     stats: [
